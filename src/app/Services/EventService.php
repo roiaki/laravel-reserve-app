@@ -18,11 +18,19 @@ class EventService
         return $is_Duplication;
     }
 
+    public static function countEventDuplication($eventDate, $startTime, $endTime)
+    {
+        return DB::table('events')
+            ->whereDate('start_date', $eventDate)
+            ->whereTime('end_date', '>', $startTime)
+            ->whereTime('start_date', '<', $endTime)
+            ->count();
+    }
+
     public static function joinDateAndTime($date, $time)
     {
-        $join = $date . " " . $time;
-        $dateTime = Carbon::createFromFormat('Y-m-d H:', $join);
-
+        $join = $date. " " . $time;
+        $dateTime = Carbon::createFromFormat('Y-m-d H:i', $join);
         return $dateTime;
     }
 }
