@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      イベント管理
+      本日以降のイベント一覧
     </h2>
   </x-slot>
 
@@ -18,7 +18,8 @@
             @endif
 
             <div class="flex justify-between">
-              <button onclick=location.href="{{ route('events.past')}}">過去のイベント</button>
+              <button onclick=location.href="{{ route('events.past')}}"
+                class="flex mb-4 ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">過去のイベント</button>
               <button onclick=location.href="{{ route('events.create') }}"
                 class="flex mb-4 ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">新規登録</button>
             </div>
@@ -27,17 +28,23 @@
               <table class="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                   <tr>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">イベント名
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      イベント名
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始日時
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      開始日時
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了日時
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      終了日時
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">予約人数
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      予約人数
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">定員
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      定員
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">表示・非表示
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                      表示・非表示
                     </th>
                     <th
                       class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
@@ -52,7 +59,13 @@
                     </td>
                     <td class="px-4 py-3">{{ $event->start_date }}</td>
                     <td class="px-4 py-3">{{ $event->end_date }}</td>
-                    <td class="px-4 py-3">後ほど</td>
+                    <td class="px-4 py-3">
+                      @if (is_null($event->number_of_people))
+                        0
+                      @else
+                        {{ $event->number_of_people }}
+                      @endif
+                    </td>
                     <td class="px-4 py-3">{{ $event->max_people }}</td>
                     <td class="px-4 py-3">{{ $event->is_visible }}</td>
                   </tr>
@@ -62,7 +75,6 @@
               {{ $events->links() }}
             </div>
             <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-
 
             </div>
           </div>

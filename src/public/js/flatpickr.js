@@ -2892,11 +2892,17 @@ var setting = {
   dateFormat: "H:i",
   time_24hr: true,
   minTime: "10:00",
-  maxTime: "20:00"
+  maxTime: "20:00",
+  minuteIncrement: 30
 };
 (0,flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"])("#event_date", {
   "locale": flatpickr_dist_l10n_ja_js__WEBPACK_IMPORTED_MODULE_1__.Japanese,
   minDate: "today",
+  maxDate: new Date().fp_incr(30)
+});
+(0,flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"])("#calendar", {
+  "locale": flatpickr_dist_l10n_ja_js__WEBPACK_IMPORTED_MODULE_1__.Japanese,
+  // minDate: "today",
   maxDate: new Date().fp_incr(30)
 });
 (0,flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"])("#start_time", setting);

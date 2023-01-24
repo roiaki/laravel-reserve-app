@@ -52,7 +52,6 @@ class Event extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'reservations')
-        ->withPivot('id', 'number_of_people', 'canceled_date');
-
+            ->withPivot('id', 'number_of_people', 'canceled_date');
     }
 }

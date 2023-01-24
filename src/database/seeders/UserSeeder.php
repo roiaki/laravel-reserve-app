@@ -23,15 +23,15 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'role' => 1
             ],
-            [
+            [    
                 'name' => 'manager',
-                'email' => 'manager@admin.com',
+                'email' => 'manager@manager.com',
                 'password' => Hash::make('password123'),
                 'role' => 5
             ],
             [
                 'name' => 'test',
-                'email' => 'test@admin.com',
+                'email' => 'test@test.com',
                 'password' => Hash::make('password123'),
                 'role' => 9
             ]
