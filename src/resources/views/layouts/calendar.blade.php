@@ -24,7 +24,6 @@
   <x-jet-banner />
 
   <div class="min-h-screen bg-gray-100">
-    @livewire('navigation-menu')
 
     <!-- Page Heading -->
     @if (isset($header))
@@ -40,9 +39,8 @@
       {{ $slot }}
     </main>
   </div>
-
-  @stack('modals')
-
+  <script src="{{ mix('js/flatpickr.js')}}">
+  </script>
   @livewireScripts
 </body>
 
