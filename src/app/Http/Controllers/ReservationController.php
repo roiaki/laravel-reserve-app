@@ -16,6 +16,7 @@ class ReservationController extends Controller
         return view('dashboard');
     }
 
+    // イベント情報詳細画面へ
     public function detail($id)
     {
         $event = Event::findOrfail($id);
@@ -27,20 +28,18 @@ class ReservationController extends Controller
         ->having('event_id', $event->id)
         ->first();
 
-        if(!is_null($reservedPeople))
-        {
+        // 予約がある場合
+        if(!is_null($reservedPeople)) {
             $reservablePeople = $event->max_people - $reservedPeople->number_of_people;
-        }
-        else{
+        } else {
             $reservablePeople = $event->max_people;
         }
 
-      $isReserved = Reservation::where('user_id', '=', Auth::id())
-      ->where('event_id', '=', $id)
-      ->where('canceled_date', '=', null)
-      ->latest()
-      ->first();
-
+        $isReserved = Reservation::where('user_id', '=', Auth::id())
+        ->where('event_id', '=', $id)
+        ->where('canceled_date', '=', null)
+        ->latest()
+        ->first();
 
         return view('event-detail', 
         compact('event', 'reservablePeople', 'isReserved') );
@@ -57,8 +56,9 @@ class ReservationController extends Controller
         ->having('event_id', $event->id)
         ->first();
 
+        // 予約人数が空、最大定員　>= 予約人数 + 予約された人数 なら予約OK
         if(is_null($reservedPeople) || 
-        $event->max_people >= $reservedPeople->number_of_people + $request->reserved_people)
+            $event->max_people >= $reservedPeople->number_of_people + $request->reserved_people)
         {
             Reservation::create([
                 'user_id' => Auth::id(),
@@ -70,13 +70,9 @@ class ReservationController extends Controller
     
             return to_route('dashboard');
 
-        }
-        else{
+        } else {
             session()->flash('status', 'この人数は予約できません。');
             return view('dashboard');
         }
-
-
-
     }
 }
