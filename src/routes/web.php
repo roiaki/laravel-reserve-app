@@ -28,6 +28,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->name('dashboard');
 
+// 0~5
 Route::prefix('manager')
     ->middleware('can:manager-higher')
     ->group(function(){
@@ -35,6 +36,7 @@ Route::prefix('manager')
         Route::resource('events', EventController::class);
 });
 
+// 0~9
 Route::middleware('can:user-higher')
     ->group(function(){
         Route::get('/dashboard', [ReservationController::class, 'dashboard'])->name('dashboard');
